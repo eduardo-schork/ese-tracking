@@ -1,0 +1,45 @@
+import { TDeliveryAppointmentEntity } from "@/domain/entities/delivery-appointment.entity";
+import { DataTypes, Model, Sequelize } from "sequelize";
+
+class DeliveryAppointmentModel
+    extends Model<TDeliveryAppointmentEntity>
+    implements TDeliveryAppointmentEntity
+{
+    id!: string;
+    scheduledTo!: Date;
+    deliveryProcessId!: string;
+    addressId!: string;
+    createdAt!: Date;
+    createdBy!: string;
+    updatedAt?: Date;
+    updatedBy?: string;
+    deletedAt?: Date;
+    deletedBy?: string;
+}
+
+export const defineDeliveryAppointmentModel = (sequelize: Sequelize) => {
+    DeliveryAppointmentModel.init(
+        {
+            id: { type: DataTypes.UUID, primaryKey: true, defaultValue: DataTypes.UUIDV4 },
+            scheduledTo: DataTypes.DATE,
+            deliveryProcessId: DataTypes.UUID,
+            addressId: DataTypes.UUID,
+            createdAt: DataTypes.DATE,
+            createdBy: DataTypes.STRING,
+            updatedAt: DataTypes.DATE,
+            updatedBy: DataTypes.STRING,
+            deletedAt: DataTypes.DATE,
+            deletedBy: DataTypes.STRING,
+        },
+        {
+            sequelize,
+            modelName: "DeliveryAppointment",
+            tableName: "delivery_appointments",
+            timestamps: false,
+        }
+    );
+
+    return DeliveryAppointmentModel;
+};
+
+export default DeliveryAppointmentModel;
