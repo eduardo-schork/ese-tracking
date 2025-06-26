@@ -16,7 +16,11 @@ class FleetModel extends Model<TFleetEntity> implements TFleetEntity {
 export const defineFleetModel = (sequelize: Sequelize) => {
     FleetModel.init(
         {
-            id: { type: DataTypes.UUID, primaryKey: true, defaultValue: DataTypes.UUIDV4 },
+            id: {
+                type: DataTypes.INTEGER,
+                primaryKey: true,
+                autoIncrement: true,
+            },
             name: DataTypes.STRING,
             createdAt: DataTypes.DATE,
             createdBy: DataTypes.STRING,

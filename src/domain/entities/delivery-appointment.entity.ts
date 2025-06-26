@@ -1,8 +1,8 @@
 import { TBaseEntity } from "./base.entity";
 
 export type TDeliveryAppointmentEntity = {
-    id: string;
+    id?: string;
     scheduledTo: Date;
-    deliveryProcessId: string;
-    addressId: string;
+    deliveryProcessId: number;
+    addressId: number;
 } & TBaseEntity;

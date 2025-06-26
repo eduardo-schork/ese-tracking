@@ -19,9 +19,13 @@ class CollectionScheduleModel
 export const defineCollectionScheduleModel = (sequelize: Sequelize) => {
     CollectionScheduleModel.init(
         {
-            id: { type: DataTypes.UUID, primaryKey: true, defaultValue: DataTypes.UUIDV4 },
+            id: {
+                type: DataTypes.INTEGER,
+                primaryKey: true,
+                autoIncrement: true,
+            },
             scheduledTo: DataTypes.DATE,
-            addressId: DataTypes.UUID,
+            addressId: DataTypes.INTEGER,
             createdAt: DataTypes.DATE,
             createdBy: DataTypes.STRING,
             updatedAt: DataTypes.DATE,

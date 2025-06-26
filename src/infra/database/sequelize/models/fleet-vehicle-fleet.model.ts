@@ -19,9 +19,13 @@ class FleetVehicleFleetModel
 export const defineFleetVehicleFleetModel = (sequelize: Sequelize) => {
     FleetVehicleFleetModel.init(
         {
-            id: { type: DataTypes.UUID, primaryKey: true, defaultValue: DataTypes.UUIDV4 },
-            fleetVehicleId: DataTypes.UUID,
-            fleetId: DataTypes.UUID,
+            id: {
+                type: DataTypes.INTEGER,
+                primaryKey: true,
+                autoIncrement: true,
+            },
+            fleetVehicleId: DataTypes.INTEGER,
+            fleetId: DataTypes.INTEGER,
             createdAt: DataTypes.DATE,
             createdBy: DataTypes.STRING,
             updatedAt: DataTypes.DATE,

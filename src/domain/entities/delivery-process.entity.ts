@@ -1,10 +1,10 @@
 import { TBaseEntity } from "./base.entity";
 
 export type TDeliveryProcessEntity = {
-    id: string;
-    fleetId: string;
-    fleetVehicleId: string;
-    statusId: string;
+    id: number;
+    fleetId: number;
+    fleetVehicleId: number;
+    statusId: number;
     startedAt: Date;
     endedAt?: Date;
 } & TBaseEntity;

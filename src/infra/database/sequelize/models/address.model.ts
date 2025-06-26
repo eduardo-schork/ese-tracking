@@ -2,7 +2,7 @@ import { TAddressEntity } from "@/domain/entities/address.entity";
 import { DataTypes, Model, Sequelize } from "sequelize";
 
 class AddressModel extends Model<TAddressEntity> implements TAddressEntity {
-    id!: string;
+    id!: number;
     street!: string;
     number!: string;
     complement?: string;
@@ -21,16 +21,44 @@ class AddressModel extends Model<TAddressEntity> implements TAddressEntity {
 export const defineAddressModel = (sequelize: Sequelize) => {
     AddressModel.init(
         {
-            id: { type: DataTypes.UUID, primaryKey: true, defaultValue: DataTypes.UUIDV4 },
-            street: DataTypes.STRING,
-            number: DataTypes.STRING,
+            id: {
+                type: DataTypes.INTEGER,
+                primaryKey: true,
+                autoIncrement: true,
+            },
+            street: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            number: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
             complement: DataTypes.STRING,
-            neighborhood: DataTypes.STRING,
-            city: DataTypes.STRING,
-            state: DataTypes.STRING,
-            postalCode: DataTypes.STRING,
-            createdAt: DataTypes.DATE,
-            createdBy: DataTypes.STRING,
+            neighborhood: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            city: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            state: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            postalCode: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            createdAt: {
+                type: DataTypes.DATE,
+                defaultValue: DataTypes.NOW,
+            },
+            createdBy: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
             updatedAt: DataTypes.DATE,
             updatedBy: DataTypes.STRING,
             deletedAt: DataTypes.DATE,

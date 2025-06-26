@@ -20,10 +20,14 @@ class DeliveryAppointmentModel
 export const defineDeliveryAppointmentModel = (sequelize: Sequelize) => {
     DeliveryAppointmentModel.init(
         {
-            id: { type: DataTypes.UUID, primaryKey: true, defaultValue: DataTypes.UUIDV4 },
+            id: {
+                type: DataTypes.INTEGER,
+                primaryKey: true,
+                autoIncrement: true,
+            },
             scheduledTo: DataTypes.DATE,
-            deliveryProcessId: DataTypes.UUID,
-            addressId: DataTypes.UUID,
+            deliveryProcessId: DataTypes.INTEGER,
+            addressId: DataTypes.INTEGER,
             createdAt: DataTypes.DATE,
             createdBy: DataTypes.STRING,
             updatedAt: DataTypes.DATE,

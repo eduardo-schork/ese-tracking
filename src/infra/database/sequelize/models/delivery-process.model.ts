@@ -2,10 +2,10 @@ import { TDeliveryProcessEntity } from "@/domain/entities/delivery-process.entit
 import { DataTypes, Model, Sequelize } from "sequelize";
 
 class DeliveryProcessModel extends Model<TDeliveryProcessEntity> implements TDeliveryProcessEntity {
-    id!: string;
-    fleetId!: string;
-    fleetVehicleId!: string;
-    statusId!: string;
+    id!: number;
+    fleetId!: number;
+    fleetVehicleId!: number;
+    statusId!: number;
     startedAt!: Date;
     endedAt?: Date;
     createdAt!: Date;
@@ -19,10 +19,14 @@ class DeliveryProcessModel extends Model<TDeliveryProcessEntity> implements TDel
 export const defineDeliveryProcessModel = (sequelize: Sequelize) => {
     DeliveryProcessModel.init(
         {
-            id: { type: DataTypes.UUID, primaryKey: true, defaultValue: DataTypes.UUIDV4 },
-            fleetId: DataTypes.UUID,
-            fleetVehicleId: DataTypes.UUID,
-            statusId: DataTypes.UUID,
+            id: {
+                type: DataTypes.INTEGER,
+                primaryKey: true,
+                autoIncrement: true,
+            },
+            fleetId: DataTypes.INTEGER,
+            fleetVehicleId: DataTypes.INTEGER,
+            statusId: DataTypes.INTEGER,
             startedAt: DataTypes.DATE,
             endedAt: DataTypes.DATE,
             createdAt: DataTypes.DATE,

@@ -7,7 +7,7 @@ export class DeliveryProcessRepository implements IDeliveryProcessRepository {
         return await DeliveryProcessModel.findAll({ raw: true });
     }
 
-    async findOne(id: string): Promise<TDeliveryProcessEntity | null> {
+    async findOne(id: number): Promise<TDeliveryProcessEntity | null> {
         return await DeliveryProcessModel.findByPk(id, { raw: true });
     }
 
@@ -17,7 +17,7 @@ export class DeliveryProcessRepository implements IDeliveryProcessRepository {
     }
 
     async update(
-        id: string,
+        id: number,
         data: Partial<TDeliveryProcessEntity>
     ): Promise<TDeliveryProcessEntity | null> {
         const record = await DeliveryProcessModel.findByPk(id);
@@ -26,7 +26,7 @@ export class DeliveryProcessRepository implements IDeliveryProcessRepository {
         return record.get({ plain: true }) as TDeliveryProcessEntity;
     }
 
-    async delete(id: string): Promise<void> {
+    async delete(id: number): Promise<void> {
         await DeliveryProcessModel.destroy({ where: { id } });
     }
 }
