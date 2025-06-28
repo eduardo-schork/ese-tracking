@@ -2,11 +2,11 @@ import { TDeliveryProcessStatusEntity } from "../entities/delivery-process-statu
 
 export interface IDeliveryProcessStatusRepository {
     findAll(): Promise<TDeliveryProcessStatusEntity[]>;
-    findOne(id: string): Promise<TDeliveryProcessStatusEntity | null>;
+    findOne(id: number): Promise<TDeliveryProcessStatusEntity | null>;
     create(data: TDeliveryProcessStatusEntity): Promise<TDeliveryProcessStatusEntity>;
     update(
-        id: string,
+        id: number,
         data: Partial<TDeliveryProcessStatusEntity>
     ): Promise<TDeliveryProcessStatusEntity | null>;
-    delete(id: string): Promise<void>;
+    delete(id: number): Promise<void>;
 }

@@ -1,6 +1,6 @@
 import { TBaseEntity } from "./base.entity";
 
 export type TDeliveryProcessStatusEntity = {
-    id: string;
+    id?: number;
     name: string;
 } & TBaseEntity;

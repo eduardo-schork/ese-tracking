@@ -2,11 +2,11 @@ import { TCollectionScheduleEntity } from "../entities/collection-schedule.entit
 
 export interface ICollectionScheduleRepository {
     findAll(): Promise<TCollectionScheduleEntity[]>;
-    findOne(id: string): Promise<TCollectionScheduleEntity | null>;
+    findOne(id: number): Promise<TCollectionScheduleEntity | null>;
     create(data: TCollectionScheduleEntity): Promise<TCollectionScheduleEntity>;
     update(
-        id: string,
+        id: number,
         data: Partial<TCollectionScheduleEntity>
     ): Promise<TCollectionScheduleEntity | null>;
-    delete(id: string): Promise<void>;
+    delete(id: number): Promise<void>;
 }

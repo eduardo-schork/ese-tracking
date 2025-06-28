@@ -28,7 +28,7 @@ COPY wait-for-it.sh ./wait-for-it.sh
 RUN chmod +x ./wait-for-it.sh
 
 # Instala apenas dependências de produção
-RUN yarn install --production
+RUN yarn install 
 
 ENV NODE_ENV=production
 

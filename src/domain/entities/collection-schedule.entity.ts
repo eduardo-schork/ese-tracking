@@ -1,7 +1,7 @@
 import { TBaseEntity } from "./base.entity";
 
 export type TCollectionScheduleEntity = {
-    id: string;
+    id?: number;
     scheduledTo: Date;
-    addressId: string;
+    addressId: number;
 } & TBaseEntity;

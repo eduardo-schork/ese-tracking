@@ -2,11 +2,11 @@ import { TDeliveryAppointmentEntity } from "../entities/delivery-appointment.ent
 
 export interface IDeliveryAppointmentRepository {
     findAll(): Promise<TDeliveryAppointmentEntity[]>;
-    findOne(id: string): Promise<TDeliveryAppointmentEntity | null>;
+    findOne(id: number): Promise<TDeliveryAppointmentEntity | null>;
     create(data: TDeliveryAppointmentEntity): Promise<TDeliveryAppointmentEntity>;
     update(
-        id: string,
+        id: number,
         data: Partial<TDeliveryAppointmentEntity>
     ): Promise<TDeliveryAppointmentEntity | null>;
-    delete(id: string): Promise<void>;
+    delete(id: number): Promise<void>;
 }

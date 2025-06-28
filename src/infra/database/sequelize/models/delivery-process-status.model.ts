@@ -5,7 +5,7 @@ class DeliveryProcessStatusModel
     extends Model<TDeliveryProcessStatusEntity>
     implements TDeliveryProcessStatusEntity
 {
-    id!: string;
+    id!: number;
     name!: string;
     createdAt!: Date;
     createdBy!: string;
