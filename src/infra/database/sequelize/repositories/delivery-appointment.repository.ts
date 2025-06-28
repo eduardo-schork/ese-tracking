@@ -7,7 +7,7 @@ export class DeliveryAppointmentRepository implements IDeliveryAppointmentReposi
         return await DeliveryAppointmentModel.findAll({ raw: true });
     }
 
-    async findOne(id: string): Promise<TDeliveryAppointmentEntity | null> {
+    async findOne(id: number): Promise<TDeliveryAppointmentEntity | null> {
         return await DeliveryAppointmentModel.findByPk(id, { raw: true });
     }
 
@@ -17,7 +17,7 @@ export class DeliveryAppointmentRepository implements IDeliveryAppointmentReposi
     }
 
     async update(
-        id: string,
+        id: number,
         data: Partial<TDeliveryAppointmentEntity>
     ): Promise<TDeliveryAppointmentEntity | null> {
         const record = await DeliveryAppointmentModel.findByPk(id);
@@ -26,7 +26,7 @@ export class DeliveryAppointmentRepository implements IDeliveryAppointmentReposi
         return record.get({ plain: true }) as TDeliveryAppointmentEntity;
     }
 
-    async delete(id: string): Promise<void> {
+    async delete(id: number): Promise<void> {
         await DeliveryAppointmentModel.destroy({ where: { id } });
     }
 }

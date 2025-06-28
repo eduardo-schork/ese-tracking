@@ -7,7 +7,7 @@ export class AddressRepository implements IAddressRepository {
         return await AddressModel.findAll({ raw: true });
     }
 
-    async findOne(id: string): Promise<TAddressEntity | null> {
+    async findOne(id: number): Promise<TAddressEntity | null> {
         return await AddressModel.findByPk(id, { raw: true });
     }
 
@@ -16,7 +16,7 @@ export class AddressRepository implements IAddressRepository {
         return created.get({ plain: true });
     }
 
-    async update(id: string, data: Partial<TAddressEntity>): Promise<TAddressEntity | null> {
+    async update(id: number, data: Partial<TAddressEntity>): Promise<TAddressEntity | null> {
         const address = await AddressModel.findByPk(id);
         if (!address) return null;
 
@@ -24,7 +24,7 @@ export class AddressRepository implements IAddressRepository {
         return address.get({ plain: true }) as TAddressEntity;
     }
 
-    async delete(id: string): Promise<void> {
+    async delete(id: number): Promise<void> {
         await AddressModel.destroy({ where: { id } });
     }
 }

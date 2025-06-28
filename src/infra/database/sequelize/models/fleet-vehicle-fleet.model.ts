@@ -5,9 +5,9 @@ class FleetVehicleFleetModel
     extends Model<TFleetVehicleFleetEntity>
     implements TFleetVehicleFleetEntity
 {
-    id!: string;
-    fleetVehicleId!: string;
-    fleetId!: string;
+    id!: number;
+    fleetVehicleId!: number;
+    fleetId!: number;
     createdAt!: Date;
     createdBy!: string;
     updatedAt?: Date;

@@ -7,7 +7,7 @@ export class CollectionScheduleRepository implements ICollectionScheduleReposito
         return await CollectionScheduleModel.findAll({ raw: true });
     }
 
-    async findOne(id: string): Promise<TCollectionScheduleEntity | null> {
+    async findOne(id: number): Promise<TCollectionScheduleEntity | null> {
         return await CollectionScheduleModel.findByPk(id, { raw: true });
     }
 
@@ -17,7 +17,7 @@ export class CollectionScheduleRepository implements ICollectionScheduleReposito
     }
 
     async update(
-        id: string,
+        id: number,
         data: Partial<TCollectionScheduleEntity>
     ): Promise<TCollectionScheduleEntity | null> {
         const record = await CollectionScheduleModel.findByPk(id);
@@ -26,7 +26,7 @@ export class CollectionScheduleRepository implements ICollectionScheduleReposito
         return record.get({ plain: true }) as TCollectionScheduleEntity;
     }
 
-    async delete(id: string): Promise<void> {
+    async delete(id: number): Promise<void> {
         await CollectionScheduleModel.destroy({ where: { id } });
     }
 }

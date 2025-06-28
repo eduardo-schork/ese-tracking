@@ -1,7 +1,7 @@
 import { TBaseEntity } from "./base.entity";
 
 export type TFleetVehicleEntity = {
-    id: string;
+    id?: number;
     model: string;
     plate: string;
     cpfDriver: string;

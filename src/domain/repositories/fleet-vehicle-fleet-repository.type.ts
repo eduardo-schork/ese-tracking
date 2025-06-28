@@ -2,11 +2,11 @@ import { TFleetVehicleFleetEntity } from "../entities/fleet-vehicle-fleet.entity
 
 export interface IFleetVehicleFleetRepository {
     findAll(): Promise<TFleetVehicleFleetEntity[]>;
-    findOne(id: string): Promise<TFleetVehicleFleetEntity | null>;
+    findOne(id: number): Promise<TFleetVehicleFleetEntity | null>;
     create(data: TFleetVehicleFleetEntity): Promise<TFleetVehicleFleetEntity>;
     update(
-        id: string,
+        id: number,
         data: Partial<TFleetVehicleFleetEntity>
     ): Promise<TFleetVehicleFleetEntity | null>;
-    delete(id: string): Promise<void>;
+    delete(id: number): Promise<void>;
 }
