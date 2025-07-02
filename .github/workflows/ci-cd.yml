@@ -3,12 +3,10 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      # - develop
       - staging
       - master
   pull_request:
     branches:
-      # - develop
       - staging
       - master
 
@@ -19,14 +17,17 @@ jobs:
   build-and-test:
     name: 🛠️ Build & Test
     runs-on: ubuntu-latest
+    outputs:
+      node-mod-cache: ${{ steps.cache-node.outputs.cache-hit }}
     steps:
       - uses: actions/checkout@v3
 
       - name: Cache node modules
+        id: cache-node
         uses: actions/cache@v3
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
 
@@ -46,34 +47,29 @@ jobs:
         run: npm test
 
   sonarcloud:
-      name: 🔍 SonarCloud Analysis
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v3
+    name: 🔍 SonarCloud Analysis
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
 
-        - name: Set up Node.js
-          uses: actions/setup-node@v3
-          with:
-            node-version: 18
+      # (Re)instala as dependências para o scanner
+      - name: Install dependencies
+        run: npm install
 
-        - name: Install dependencies
-          run: npm ci
-
-        - name: Run SonarCloud Scan
-          uses: SonarSource/sonarcloud-github-action@master
-          with:
-            organization: your-sonarcloud-org     # ex: eduardo-schork
-            projectKey: eduardo-schork_ese-tracking
-            projectName: ese-tracking
-          env:
-            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
+      - name: Run SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        with:
+          organization: eduardo-schork            # substitua pelo seu org no SonarCloud
+          projectKey: eduardo-schork_ese-tracking # id do projeto no SonarCloud
+          projectName: ese-tracking
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   build-and-push-docker:
     name: 🐳 Build & Push Docker
     needs: [build-and-test, sonarcloud]
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
 
