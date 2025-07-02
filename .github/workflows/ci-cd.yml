@@ -71,7 +71,7 @@ jobs:
 
   build-and-push-docker:
     name: 🐳 Build & Push Docker
-    needs: [build-and-test, sonar-scan]
+    needs: [build-and-test, sonarcloud]
     runs-on: ubuntu-latest
 
     steps:
