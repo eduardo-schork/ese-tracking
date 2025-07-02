@@ -57,18 +57,14 @@ jobs:
             - 9000:9000
           options: >-
             --env SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true
-            --no-healthcheck
+            --health-cmd="curl -s http://localhost:9000/api/system/status | grep -q UP"
+            --health-interval=10s
+            --health-timeout=5s
+            --health-retries=20
 
       steps:
         - name: Checkout code
           uses: actions/checkout@v3
-
-        - name: Wait for SonarQube to be ready
-          run: |
-            until curl -s http://localhost:9000/api/system/status | grep -q "UP"; do
-              echo "⏳ Aguardando SonarQube..."
-              sleep 5
-            done
 
         - name: Run SonarScanner
           run: |
