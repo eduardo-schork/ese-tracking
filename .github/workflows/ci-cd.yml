@@ -46,43 +46,41 @@ jobs:
         run: npm test
 
   sonar-scan:
-    name: 🔍 SonarQube Analysis
-    needs: build-and-test
-    runs-on: ubuntu-latest
+      name: 🔍 SonarQube Analysis
+      needs: build-and-test
+      runs-on: ubuntu-latest
 
-    services:
-      sonarqube:
-        image: sonarqube:lts-community
-        ports:
-          - 9000:9000
-        options: >-
-          --health-cmd="curl -s http://localhost:9000/api/system/status | grep -q UP"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=5
+      services:
+        sonarqube:
+          image: sonarqube:lts-community
+          ports:
+            - 9000:9000
+          options: >-
+            --env SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true
+            --no-healthcheck
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v3
 
-      - name: Wait for SonarQube to be ready
-        run: |
-          until curl -s http://localhost:9000/api/system/status | grep -q "UP"; do
-            echo "⏳ Aguardando SonarQube..."
-            sleep 5
-          done
+        - name: Wait for SonarQube to be ready
+          run: |
+            until curl -s http://localhost:9000/api/system/status | grep -q "UP"; do
+              echo "⏳ Aguardando SonarQube..."
+              sleep 5
+            done
 
-      - name: Run SonarScanner
-        run: |
-          docker run --rm --platform linux/amd64 \
-            -e SONAR_HOST_URL="http://host.docker.internal:9000" \
-            -e SONAR_LOGIN="${{ secrets.SONAR_TOKEN }}" \
-            -v "${{ github.workspace }}":/usr/src \
-            sonarsource/sonar-scanner-cli \
-            -Dsonar.projectKey=ese-tracking \
-            -Dsonar.sources=src \
-            -Dsonar.host.url=http://host.docker.internal:9000 \
-            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+        - name: Run SonarScanner
+          run: |
+            docker run --rm --platform linux/amd64 \
+              -e SONAR_LOGIN="${{ secrets.SONAR_TOKEN }}" \
+              -v "${{ github.workspace }}":/usr/src \
+              sonarsource/sonar-scanner-cli \
+              -Dsonar.projectKey=ese-tracking \
+              -Dsonar.sources=src \
+              -Dsonar.host.url=http://host.docker.internal:9000 \
+              -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+
 
   build-and-push-docker:
     name: 🐳 Build & Push Docker
