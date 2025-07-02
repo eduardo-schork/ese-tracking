@@ -45,10 +45,50 @@ jobs:
       - name: Run tests
         run: npm test
 
-  build-and-push-docker:
-    name: 🐳 Build & Push Docker
+  sonar-scan:
+    name: 🔍 SonarQube Analysis
     needs: build-and-test
     runs-on: ubuntu-latest
+
+    services:
+      sonarqube:
+        image: sonarqube:lts-community
+        ports:
+          - 9000:9000
+        options: >-
+          --health-cmd="curl -s http://localhost:9000/api/system/status | grep -q UP"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Wait for SonarQube to be ready
+        run: |
+          until curl -s http://localhost:9000/api/system/status | grep -q "UP"; do
+            echo "⏳ Aguardando SonarQube..."
+            sleep 5
+          done
+
+      - name: Run SonarScanner
+        run: |
+          docker run --rm --platform linux/amd64 \
+            -e SONAR_HOST_URL="http://host.docker.internal:9000" \
+            -e SONAR_LOGIN="${{ secrets.SONAR_TOKEN }}" \
+            -v "${{ github.workspace }}":/usr/src \
+            sonarsource/sonar-scanner-cli \
+            -Dsonar.projectKey=ese-tracking \
+            -Dsonar.sources=src \
+            -Dsonar.host.url=http://host.docker.internal:9000 \
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+
+  build-and-push-docker:
+    name: 🐳 Build & Push Docker
+    needs: [build-and-test, sonar-scan]
+    runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
 
@@ -73,17 +113,3 @@ jobs:
         run: |
           docker tag $IMAGE_NAME:${{ github.sha }} $IMAGE_NAME:latest
           docker push $IMAGE_NAME:latest
-
-  # sonar-scan:
-  #   name: 🔍 SonarQube Analysis
-  #   needs: build-and-lint
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v3
-
-  #     - name: SonarCloud Scan
-  #       uses: SonarSource/sonarcloud-github-action@v1
-  #       with:
-  #         projectKey: your-org_ese-tracking
-  #         organization: your-org
-  #         token: ${{ secrets.SONAR_TOKEN }}
