@@ -13,7 +13,7 @@ on:
       - master
 
 env:
-  IMAGE_NAME: eduardo/ese-tracking
+  IMAGE_NAME: schorka1/ese-tracking
 
 jobs:
   build-and-test:
