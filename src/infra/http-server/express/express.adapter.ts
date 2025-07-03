@@ -14,7 +14,7 @@ class ExpressAdapter {
         // const isDevelopment = process.env.NODE_ENV === "development";
 
         // if (isDevelopment) {
-        const specPath = path.resolve(__dirname, "../../../../docs/openapi.yaml");
+        const specPath = path.join(process.cwd(), "docs", "openapi.yaml");
         const openApiDocument = YAML.load(specPath);
         this.app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(openApiDocument));
         // }
