@@ -4,6 +4,7 @@ info:
   version: 1.0.0
 servers:
   - url: http://localhost:3001/api
+  - url: http://ese-tracking-staging.onrender.com/api
 paths:
   /address:
     get:
