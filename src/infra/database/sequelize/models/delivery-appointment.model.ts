@@ -5,10 +5,10 @@ class DeliveryAppointmentModel
     extends Model<TDeliveryAppointmentEntity>
     implements TDeliveryAppointmentEntity
 {
-    id!: string;
+    id!: number;
     scheduledTo!: Date;
-    deliveryProcessId!: string;
-    addressId!: string;
+    deliveryProcessId!: number;
+    addressId!: number;
     createdAt!: Date;
     createdBy!: string;
     updatedAt?: Date;

@@ -5,9 +5,9 @@ class CollectionScheduleModel
     extends Model<TCollectionScheduleEntity>
     implements TCollectionScheduleEntity
 {
-    id!: string;
+    id!: number;
     scheduledTo!: Date;
-    addressId!: string;
+    addressId!: number;
     createdAt!: Date;
     createdBy!: string;
     updatedAt?: Date;

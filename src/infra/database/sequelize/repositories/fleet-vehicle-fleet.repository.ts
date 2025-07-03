@@ -7,7 +7,7 @@ export class FleetVehicleFleetRepository implements IFleetVehicleFleetRepository
         return await FleetVehicleFleetModel.findAll({ raw: true });
     }
 
-    async findOne(id: string): Promise<TFleetVehicleFleetEntity | null> {
+    async findOne(id: number): Promise<TFleetVehicleFleetEntity | null> {
         return await FleetVehicleFleetModel.findByPk(id, { raw: true });
     }
 
@@ -17,7 +17,7 @@ export class FleetVehicleFleetRepository implements IFleetVehicleFleetRepository
     }
 
     async update(
-        id: string,
+        id: number,
         data: Partial<TFleetVehicleFleetEntity>
     ): Promise<TFleetVehicleFleetEntity | null> {
         const record = await FleetVehicleFleetModel.findByPk(id);
@@ -26,7 +26,7 @@ export class FleetVehicleFleetRepository implements IFleetVehicleFleetRepository
         return record.get({ plain: true }) as TFleetVehicleFleetEntity;
     }
 
-    async delete(id: string): Promise<void> {
+    async delete(id: number): Promise<void> {
         await FleetVehicleFleetModel.destroy({ where: { id } });
     }
 }

@@ -2,7 +2,7 @@ import { TFleetEntity } from "@/domain/entities/fleet.entity";
 import { DataTypes, Model, Sequelize } from "sequelize";
 
 class FleetModel extends Model<TFleetEntity> implements TFleetEntity {
-    id!: string;
+    id!: number;
     name!: string;
     vehicles?: any;
     createdAt!: Date;

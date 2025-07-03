@@ -7,7 +7,7 @@ export class DeliveryProcessStatusRepository implements IDeliveryProcessStatusRe
         return await DeliveryProcessStatusModel.findAll({ raw: true });
     }
 
-    async findOne(id: string): Promise<TDeliveryProcessStatusEntity | null> {
+    async findOne(id: number): Promise<TDeliveryProcessStatusEntity | null> {
         return await DeliveryProcessStatusModel.findByPk(id, { raw: true });
     }
 
@@ -17,7 +17,7 @@ export class DeliveryProcessStatusRepository implements IDeliveryProcessStatusRe
     }
 
     async update(
-        id: string,
+        id: number,
         data: Partial<TDeliveryProcessStatusEntity>
     ): Promise<TDeliveryProcessStatusEntity | null> {
         const record = await DeliveryProcessStatusModel.findByPk(id);
@@ -26,7 +26,7 @@ export class DeliveryProcessStatusRepository implements IDeliveryProcessStatusRe
         return record.get({ plain: true }) as TDeliveryProcessStatusEntity;
     }
 
-    async delete(id: string): Promise<void> {
+    async delete(id: number): Promise<void> {
         await DeliveryProcessStatusModel.destroy({ where: { id } });
     }
 }

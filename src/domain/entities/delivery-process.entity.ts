@@ -1,7 +1,7 @@
 import { TBaseEntity } from "./base.entity";
 
 export type TDeliveryProcessEntity = {
-    id: number;
+    id?: number;
     fleetId: number;
     fleetVehicleId: number;
     statusId: number;

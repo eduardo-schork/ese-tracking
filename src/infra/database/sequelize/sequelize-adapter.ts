@@ -16,15 +16,22 @@ class SequelizeAdapter {
     public instance: Sequelize;
 
     constructor() {
-        this.instance = new Sequelize({
-            dialect: "postgres",
-            host: process.env.POSTGRES_HOST,
-            port: Number(process.env.POSTGRES_PORT),
-            database: process.env.POSTGRES_DB,
-            username: process.env.POSTGRES_USER,
-            password: process.env.POSTGRES_PASSWORD,
-            logging: false,
-        });
+        const isTest = process.env.NODE_ENV === "test";
+
+        this.instance = isTest
+            ? new Sequelize({
+                  dialect: "sqlite",
+                  storage: ":memory:",
+                  logging: false,
+              })
+            : new Sequelize({
+                  dialect: "postgres",
+                  host: process.env.POSTGRES_HOST,
+                  port: Number(process.env.POSTGRES_PORT),
+                  database: process.env.POSTGRES_DB,
+                  username: process.env.POSTGRES_USER,
+                  password: process.env.POSTGRES_PASSWORD,
+              });
     }
 
     async connect(forceSync: boolean = false) {
