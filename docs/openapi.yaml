@@ -1,0 +1,479 @@
+openapi: 3.0.0
+info:
+  title: ESE Tracking API
+  version: 1.0.0
+servers:
+  - url: http://localhost:3001/api
+paths:
+  /address:
+    get:
+      summary: List all addresses
+      responses:
+        '200':
+          description: OK
+    post:
+      summary: Create an address
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Address'
+      responses:
+        '201':
+          description: Created
+  /address/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get an address by ID
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+    put:
+      summary: Update an address
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Address'
+      responses:
+        '200':
+          description: Updated
+    delete:
+      summary: Delete an address
+      responses:
+        '204':
+          description: No Content
+  /collection-schedule:
+    get:
+      summary: List all collection schedules
+      responses:
+        '200':
+          description: OK
+    post:
+      summary: Create a collection schedule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionSchedule'
+      responses:
+        '201':
+          description: Created
+  /collection-schedule/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get a collection schedule by ID
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+    put:
+      summary: Update a collection schedule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionSchedule'
+      responses:
+        '200':
+          description: Updated
+    delete:
+      summary: Delete a collection schedule
+      responses:
+        '204':
+          description: No Content
+  /delivery-appointment:
+    get:
+      summary: List all delivery appointments
+      responses:
+        '200':
+          description: OK
+    post:
+      summary: Create a delivery appointment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeliveryAppointment'
+      responses:
+        '201':
+          description: Created
+  /delivery-appointment/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get a delivery appointment by ID
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+    put:
+      summary: Update a delivery appointment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeliveryAppointment'
+      responses:
+        '200':
+          description: Updated
+    delete:
+      summary: Delete a delivery appointment
+      responses:
+        '204':
+          description: No Content
+  /delivery-process-status:
+    get:
+      summary: List all delivery process statuses
+      responses:
+        '200':
+          description: OK
+    post:
+      summary: Create a delivery process status
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeliveryProcessStatus'
+      responses:
+        '201':
+          description: Created
+  /delivery-process-status/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get a delivery process status by ID
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+    put:
+      summary: Update a delivery process status
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeliveryProcessStatus'
+      responses:
+        '200':
+          description: Updated
+    delete:
+      summary: Delete a delivery process status
+      responses:
+        '204':
+          description: No Content
+  /delivery-process:
+    get:
+      summary: List all delivery processes
+      responses:
+        '200':
+          description: OK
+    post:
+      summary: Create a delivery process
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeliveryProcess'
+      responses:
+        '201':
+          description: Created
+  /delivery-process/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get a delivery process by ID
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+    put:
+      summary: Update a delivery process
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeliveryProcess'
+      responses:
+        '200':
+          description: Updated
+    delete:
+      summary: Delete a delivery process
+      responses:
+        '204':
+          description: No Content
+  /fleet:
+    get:
+      summary: List all fleets
+      responses:
+        '200':
+          description: OK
+    post:
+      summary: Create a fleet
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Fleet'
+      responses:
+        '201':
+          description: Created
+  /fleet/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get a fleet by ID
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+    put:
+      summary: Update a fleet
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Fleet'
+      responses:
+        '200':
+          description: Updated
+    delete:
+      summary: Delete a fleet
+      responses:
+        '204':
+          description: No Content
+  /fleet-vehicle:
+    get:
+      summary: List all fleet vehicles
+      responses:
+        '200':
+          description: OK
+    post:
+      summary: Create a fleet vehicle
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FleetVehicle'
+      responses:
+        '201':
+          description: Created
+  /fleet-vehicle/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get a fleet vehicle by ID
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+    put:
+      summary: Update a fleet vehicle
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FleetVehicle'
+      responses:
+        '200':
+          description: Updated
+    delete:
+      summary: Delete a fleet vehicle
+      responses:
+        '204':
+          description: No Content
+  /fleet-vehicle-fleet:
+    get:
+      summary: List all fleet vehicle fleet relations
+      responses:
+        '200':
+          description: OK
+    post:
+      summary: Create a fleet vehicle fleet relation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FleetVehicleFleet'
+      responses:
+        '201':
+          description: Created
+  /fleet-vehicle-fleet/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get a fleet vehicle fleet relation by ID
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+    put:
+      summary: Update a fleet vehicle fleet relation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FleetVehicleFleet'
+      responses:
+        '200':
+          description: Updated
+    delete:
+      summary: Delete a fleet vehicle fleet relation
+      responses:
+        '204':
+          description: No Content
+components:
+  schemas:
+    Address:
+      type: object
+      properties:
+        id:
+          type: integer
+        street:
+          type: string
+        number:
+          type: string
+        complement:
+          type: string
+        neighborhood:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postalCode:
+          type: string
+    CollectionSchedule:
+      type: object
+      properties:
+        id:
+          type: integer
+        scheduledTo:
+          type: string
+          format: date-time
+        addressId:
+          type: integer
+    DeliveryAppointment:
+      type: object
+      properties:
+        id:
+          type: integer
+        scheduledTo:
+          type: string
+          format: date-time
+        deliveryProcessId:
+          type: integer
+        addressId:
+          type: integer
+    DeliveryProcessStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+    DeliveryProcess:
+      type: object
+      properties:
+        id:
+          type: integer
+        fleetId:
+          type: integer
+        fleetVehicleId:
+          type: integer
+        statusId:
+          type: integer
+        startedAt:
+          type: string
+          format: date-time
+        endedAt:
+          type: string
+          format: date-time
+    Fleet:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+    FleetVehicle:
+      type: object
+      properties:
+        id:
+          type: integer
+        model:
+          type: string
+        plate:
+          type: string
+        cpfDriver:
+          type: string
+        renavam:
+          type: string
+    FleetVehicleFleet:
+      type: object
+      properties:
+        id:
+          type: integer
+        fleetVehicleId:
+          type: integer
+        fleetId:
+          type: integer
