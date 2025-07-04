@@ -19,19 +19,16 @@ WORKDIR /app
 
 # Copia os arquivos da build
 COPY --from=builder /app/dist ./dist
+
+# Copia o spec YAML
+COPY --from=builder /app/docs ./docs
+
 COPY package.json yarn.lock ./
-
-# Copia o script wait-for-it.sh
-COPY wait-for-it.sh ./wait-for-it.sh
-
-# Dá permissão de execução no script
+COPY wait-for-it.sh ./
 RUN chmod +x ./wait-for-it.sh
 
-# Instala apenas dependências de produção
-RUN yarn install 
+RUN yarn install --production
 
 ENV NODE_ENV=production
-
 EXPOSE 3001
-
 CMD ["node", "dist/main.js"]
