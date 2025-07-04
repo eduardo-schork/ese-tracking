@@ -1,9 +1,14 @@
 import cors from "cors";
+import dotenv from "dotenv";
 import express, { Express } from "express";
 import path from "path";
 import swaggerUi from "swagger-ui-express";
 import YAML from "yamljs";
 import router from "./routes/router";
+
+dotenv.config();
+
+const env = process.env.ENV || "PROD";
 
 class ExpressAdapter {
     public app: Express;
@@ -22,9 +27,11 @@ class ExpressAdapter {
 
         this.app.use(express.json());
 
-        const specPath = path.join(process.cwd(), "docs", "openapi.yaml");
-        const openApiDocument = YAML.load(specPath);
-        this.app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(openApiDocument));
+        if (env != "PROD") {
+            const specPath = path.join(process.cwd(), "docs", "openapi.yaml");
+            const openApiDocument = YAML.load(specPath);
+            this.app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(openApiDocument));
+        }
 
         this.app.use("/api", router);
 
